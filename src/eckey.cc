@@ -413,7 +413,7 @@ BitcoinKey::VerifySignature(const Arguments& args)
   uv_work_t *req = new uv_work_t;
   req->data = baton;
 
-  uv_queue_work(uv_default_loop(), req, EIO_VerifySignature, VerifySignatureCallback);
+  uv_queue_work(uv_default_loop(), req, EIO_VerifySignature, (uv_after_work_cb) VerifySignatureCallback);
 
   return scope.Close(Undefined());
 }
